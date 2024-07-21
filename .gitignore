@@ -1,0 +1,9 @@
+__pycache__/
+/.idea/
+*.py[cod]
+/accounts.xlsx
+/last_state.json
+~*
+.venv/
+logs/
+telegram.json
