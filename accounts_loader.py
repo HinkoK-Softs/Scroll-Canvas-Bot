@@ -9,7 +9,7 @@ import pandas as pd
 from web3 import Web3
 
 import utils
-from logger import fmt, logger, TelegramHandler
+from logger import TelegramHandler, fmt, logger
 
 
 @dataclasses.dataclass

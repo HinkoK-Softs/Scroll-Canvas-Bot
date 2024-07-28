@@ -1,5 +1,4 @@
 import json
-import re
 import time
 from pathlib import Path
 
@@ -98,6 +97,8 @@ def get_eligible_badges(
         return
 
     badgelist: list[dict] = badgelist_response.json()['badges']
+
+    badgelist = list(filter(lambda badge: 'baseUrl' in badge, badgelist))
 
     badgelist: list[Badge] = [Badge(**badge) for badge in badgelist]
 
