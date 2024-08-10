@@ -141,7 +141,7 @@ def get_eligible_badges(
                 check_json = check_response.json()
 
                 message = check_json.get('message', '')
-                eligible = check_json['eligibility']
+                eligible = check_json.get('eligibility', False)
 
                 if eligible:
                     logger.success(f'[Scroll Canvas] Account is eligible for {badge.name} badge')
@@ -173,6 +173,8 @@ def get_eligible_badges(
                 else:
                     logger.info(f'[Scroll Canvas] Account is not eligible for {badge.name} badge: {message}')
                     logger.info(f'[Scroll Canvas] Requirement: {badge.description}')
+            else:
+                logger.error(f'[Scroll Canvas] Failed to check eligibility for {badge.name} badge: {check_response.status_code} - {check_response.text}')
 
     return mintable_badges
 
