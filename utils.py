@@ -222,7 +222,15 @@ def estimate_gas(
     web3: Web3,
     txn: dict
 ) -> int:
-    return int(web3.eth.estimate_gas(txn) * 1.25)
+    txn_copy = txn.copy()
+
+    if 'gasPrice' in txn_copy:
+        txn_copy.pop('gasPrice')
+    elif 'maxFeePerGas' in txn_copy:
+        txn_copy.pop('maxFeePerGas')
+        txn_copy.pop('maxPriorityFeePerGas', None)
+
+    return int(web3.eth.estimate_gas(txn_copy) * 1.25)
 
 
 def check_username(username: str) -> bool:
